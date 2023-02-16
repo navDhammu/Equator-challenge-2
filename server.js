@@ -5,9 +5,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
-import createEmotionCache from './createEmotionCache';
+import createEmotionCache from './createEmotionCache.js';
 import App from './App';
-import theme from './theme';
+import theme from './theme.js';
+import fetch from 'node-fetch';
 
 function renderFullPage(html, css, data) {
 	return `
