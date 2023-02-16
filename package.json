@@ -7,6 +7,7 @@
 		"not dead"
 	],
 	"dependencies": {
+		"@babel/cli": "^7.20.7",
 		"@babel/core": "latest",
 		"@babel/node": "latest",
 		"@babel/plugin-proposal-class-properties": "latest",
@@ -33,7 +34,7 @@
 		"start": "npm-run-all -p build serve",
 		"build": "webpack -w",
 		"serve": "nodemon --ignore ./build --exec babel-node -- server.js",
-		"production": "cross-env NODE_ENV=production --exec babel-node -- server.js",
+		"production": "cross-env NODE_ENV=production babel-node server.js",
 		"post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
 	}
 }
