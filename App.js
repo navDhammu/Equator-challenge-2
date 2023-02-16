@@ -32,8 +32,12 @@ export default function App({ data }) {
 	);
 
 	return (
-		<Container maxWidth='lg'>
-			<MaterialReactTable data={data} columns={columns} />
+		<Container maxWidth='lg' style={{ height: '100vh' }}>
+			<MaterialReactTable
+				data={data}
+				columns={columns}
+				enableStickyHeader
+			/>
 		</Container>
 	);
 }
