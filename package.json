@@ -6,6 +6,9 @@
 		">0.25%",
 		"not dead"
 	],
+	"engines": {
+		"node": ">=14 <15"
+	},
 	"dependencies": {
 		"@babel/cli": "^7.20.7",
 		"@babel/core": "latest",
