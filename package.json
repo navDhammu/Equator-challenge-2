@@ -1,47 +1,48 @@
 {
-	"name": "ssr",
-	"version": "5.0.0",
-	"private": true,
-	"browserslist": [
-		">0.25%",
-		"not dead"
-	],
-	"engines": {
-		"node": ">15"
-	},
-	"dependencies": {
-		"@babel/cli": "^7.20.7",
-		"@babel/core": "latest",
-		"@babel/node": "latest",
-		"@babel/plugin-proposal-class-properties": "latest",
-		"@babel/preset-env": "latest",
-		"@babel/preset-react": "latest",
-		"@emotion/cache": "latest",
-		"@emotion/react": "latest",
-		"@emotion/server": "latest",
-		"@emotion/styled": "latest",
-		"@mui/icons-material": "^5.11.9",
-		"@mui/material": "latest",
-		"babel-loader": "latest",
-		"cross-env": "latest",
-		"express": "latest",
-		"material-react-table": "^1.7.4",
-		"node-fetch": "^3.3.0",
-		"nodemon": "latest",
-		"npm-run-all": "latest",
-		"react": "latest",
-		"react-dom": "latest",
-		"webpack": "latest",
-		"webpack-cli": "latest"
-	},
-	"scripts": {
-		"start": "npm-run-all -p build serve",
-		"build": "webpack -w",
-		"serve": "webpack --config webpack.config.js && node dist/server.js",
-		"production": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-		"post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
-	},
-	"devDependencies": {
-		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
-	}
+    "name": "ssr",
+    "version": "5.0.0",
+    "private": true,
+    "browserslist": [
+        ">0.25%",
+        "not dead"
+    ],
+    "engines": {
+        "node": ">15"
+    },
+    "dependencies": {
+        "@babel/cli": "^7.20.7",
+        "@babel/core": "latest",
+        "@babel/node": "latest",
+        "@babel/plugin-proposal-class-properties": "latest",
+        "@babel/preset-env": "latest",
+        "@babel/preset-react": "latest",
+        "@emotion/cache": "latest",
+        "@emotion/react": "latest",
+        "@emotion/server": "latest",
+        "@emotion/styled": "latest",
+        "@mui/icons-material": "^5.11.9",
+        "@mui/material": "latest",
+        "babel-loader": "latest",
+        "cross-env": "latest",
+        "express": "latest",
+        "material-react-table": "^1.7.4",
+        "node-fetch": "^3.3.0",
+        "nodemon": "latest",
+        "npm-run-all": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "webpack": "latest",
+        "webpack-cli": "latest"
+    },
+    "scripts": {
+        "start": "npm-run-all -p build serve",
+        "build": "webpack -w",
+        "serve": "webpack --config webpack.config.js && node dist/server.js",
+        "production": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+        "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+    },
+    "devDependencies": {
+        "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+        "prettier": "2.8.4"
+    }
 }
