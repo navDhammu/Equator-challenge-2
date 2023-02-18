@@ -1,6 +1,9 @@
 import React, { useMemo } from 'react'
 import MaterialReactTable from 'material-react-table'
-import { Container, Link } from '@mui/material'
+import { Container, CssBaseline, Link, ThemeProvider } from '@mui/material'
+import theme from './theme.js'
+import createEmotionCache from './createEmotionCache.js'
+import { CacheProvider } from '@emotion/react'
 
 export default function App({ data }) {
     const columns = useMemo(
@@ -32,12 +35,17 @@ export default function App({ data }) {
     )
 
     return (
-        <Container maxWidth="lg" style={{ height: '100vh' }}>
-            <MaterialReactTable
-                data={data}
-                columns={columns}
-                enableStickyHeader
-            />
-        </Container>
+        <CacheProvider value={createEmotionCache()}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Container maxWidth="lg" style={{ height: '100vh' }}>
+                    <MaterialReactTable
+                        data={data}
+                        columns={columns}
+                        enableStickyHeader
+                    />
+                </Container>
+            </ThemeProvider>
+        </CacheProvider>
     )
 }

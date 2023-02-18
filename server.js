@@ -1,14 +1,9 @@
 import express from 'express'
-import * as React from 'react'
+import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import CssBaseline from '@mui/material/CssBaseline'
-import { ThemeProvider } from '@mui/material/styles'
-import { CacheProvider } from '@emotion/react'
 import createEmotionServer from '@emotion/server/create-instance'
-import createEmotionCache from './createEmotionCache.js'
-import App from './App'
-import theme from './theme.js'
-// import fetch from 'node-fetch'
+import createEmotionCache from './shared/createEmotionCache.js'
+import App from './shared/App'
 
 function renderFullPage(html, css, data) {
     return `
@@ -49,14 +44,7 @@ app.use(async (req, res) => {
         const { extractCriticalToChunks, constructStyleTagsFromChunks } =
             createEmotionServer(cache)
 
-        const html = ReactDOMServer.renderToString(
-            <CacheProvider value={cache}>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
-                    <App data={data} />
-                </ThemeProvider>
-            </CacheProvider>
-        )
+        const html = ReactDOMServer.renderToString(<App data={data} />)
 
         const emotionChunks = extractCriticalToChunks(html)
         const emotionCss = constructStyleTagsFromChunks(emotionChunks)
