@@ -8,7 +8,7 @@ import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from './createEmotionCache.js'
 import App from './App'
 import theme from './theme.js'
-import fetch from 'node-fetch'
+// import fetch from 'node-fetch'
 
 function renderFullPage(html, css, data) {
     return `
