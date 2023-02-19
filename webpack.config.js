@@ -20,7 +20,7 @@ const clientConfig = {
 }
 
 const serverConfig = {
-    entry: './server.js',
+    entry: './server/index.js',
     mode: process.env.NODE_ENV || 'development',
     output: {
         path: path.resolve(__dirname, 'dist'),
