@@ -1,15 +1,6 @@
 import express from 'express'
 import renderHtmlPage from './renderHtmlPage'
-import { Redis } from 'ioredis'
-import * as dotenv from 'dotenv'
-
-dotenv.config()
-
-const redis = new Redis({
-    host: process.env.REDISHOST,
-    port: process.env.REDISPORT,
-    password: process.env.REDISPASSWORD,
-})
+import redis from './redis'
 
 const app = express()
 
@@ -19,12 +10,9 @@ app.use(async (req, res) => {
     try {
         const redisData = await redis.get('scrapers')
 
-        if (redisData !== null) {
-            console.log('cached data')
-            return res.send(renderHtmlPage(redisData))
-        }
+        if (redisData !== null) return res.send(renderHtmlPage(redisData))
 
-        console.log('uncached data')
+        // fetch scrapers from github if data is not in redis
         const response = await fetch(
             'https://api.github.com/repos/Equator-Studios/scrapers/contents/scrapers'
         )
@@ -37,7 +25,9 @@ app.use(async (req, res) => {
 
         const githubDataString = JSON.stringify(githubData)
 
+        //save in redis
         redis.set('scrapers', githubDataString)
+
         res.send(renderHtmlPage(githubDataString, githubData))
     } catch (error) {
         console.log(error)
