@@ -8,11 +8,12 @@ app.use('/build', express.static('build'))
 
 app.use(async (req, res) => {
     try {
-        const redisData = await redis.get('scrapers')
+        const redisPage = await redis.get('scrapers-page')
 
-        if (redisData !== null) return res.send(renderHtmlPage(redisData))
+        //send cached html page from redis
+        if (redisPage !== null) return res.send(redisPage)
 
-        // fetch scrapers from github if data is not in redis
+        //get data from github if redis cache not available
         const response = await fetch(
             'https://api.github.com/repos/Equator-Studios/scrapers/contents/scrapers'
         )
@@ -23,12 +24,12 @@ app.use(async (req, res) => {
             download_url: data.download_url,
         }))
 
-        const githubDataString = JSON.stringify(githubData)
+        const htmlPage = renderHtmlPage(githubData)
 
-        //save in redis
-        redis.set('scrapers', githubDataString)
+        //save full page in redis
+        redis.set('scrapers-page', htmlPage)
 
-        res.send(renderHtmlPage(githubDataString, githubData))
+        res.send(htmlPage)
     } catch (error) {
         console.log(error)
     }

@@ -4,13 +4,11 @@ import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from '../shared/createEmotionCache.js'
 import App from '../shared/App'
 
-export default function renderHtmlPage(initialDataString, initialData) {
+export default function renderHtmlPage(initialData) {
     const { extractCriticalToChunks, constructStyleTagsFromChunks } =
         createEmotionServer(createEmotionCache())
 
-    const appHtml = ReactDOMServer.renderToString(
-        <App data={initialData || JSON.parse(initialDataString)} />
-    )
+    const appHtml = ReactDOMServer.renderToString(<App data={initialData} />)
 
     const emotionChunks = extractCriticalToChunks(appHtml)
     const emotionCss = constructStyleTagsFromChunks(emotionChunks)
@@ -24,7 +22,9 @@ export default function renderHtmlPage(initialDataString, initialData) {
                         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
                         <meta name="emotion-insertion-point" content="" />
                         ${emotionCss}
-                        <script>window.__initialData__ = ${initialDataString} </script>
+                        <script>window.__initialData__ = ${JSON.stringify(
+                            initialData
+                        )} </script>
                     </head>
                     <body>
                         <script async src="build/bundle.js"></script>
