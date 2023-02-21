@@ -1,11 +1,35 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import MaterialReactTable from 'material-react-table'
-import { Container, CssBaseline, Link, ThemeProvider } from '@mui/material'
-import theme from './theme.js'
+import {
+    Box,
+    Container,
+    createTheme,
+    CssBaseline,
+    Link,
+    ThemeProvider,
+    Typography,
+} from '@mui/material'
 import createEmotionCache from './createEmotionCache.js'
 import { CacheProvider } from '@emotion/react'
+import Switch from './Switch'
+
+const MODES = ['light', 'dark']
 
 export default function App({ data }) {
+    const [modeIndex, setModeIndex] = useState(0)
+
+    const toggleMode = () => setModeIndex((modeIndex + 1) % 2)
+
+    const theme = useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    mode: MODES[modeIndex],
+                },
+            }),
+        [modeIndex]
+    )
+
     const columns = useMemo(
         () => [
             {
@@ -38,7 +62,25 @@ export default function App({ data }) {
         <CacheProvider value={createEmotionCache()}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <Container maxWidth="lg" style={{ height: '100vh' }}>
+                <Box
+                    component="header"
+                    mb={4}
+                    p={2}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    boxShadow={3}
+                >
+                    <Typography variant="h4" fontWeight="500">
+                        Equator Challenge 2
+                    </Typography>
+                    <Switch
+                        sx={{ ml: 1 }}
+                        theme={theme}
+                        onChange={toggleMode}
+                    />
+                </Box>
+                <Container maxWidth="lg">
                     <MaterialReactTable
                         data={data}
                         columns={columns}
