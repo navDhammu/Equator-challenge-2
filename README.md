@@ -2,6 +2,8 @@
 
 Displays list of scrapers and their links in a table.
 
+Live: https://equator-challenge-2-production.up.railway.app/
+
 ## Features
 #### Server side rendering
 - Uses Node and Express to generate initial html page on the server
